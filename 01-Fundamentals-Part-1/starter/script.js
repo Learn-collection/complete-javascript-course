@@ -37,7 +37,7 @@ console.log(typeof sum2);
 
 // Three differn way to declare variable in java scrip
 // const, let, var
-///*
+/*
 //let --> we use let for purpose for reassigning new values to variable
 //in technicall term, we say that it is mutate the variable
 let age = 30;
@@ -49,6 +49,24 @@ const birthYear = 2000;
 birthYear = 2001;
 
 //var 
+*/
+
+/*
+//--- String ---
+const firstName = 'Bunhor';
+const job = 'IT';
+const birthYear = 1999;
+const year = 2038;
+
+const bunhor = "I'm " + firstName + ", a " 
++ (year - birthYear) +' years old, my job is ' + job + '!';
+console.log(bunhor);
+
+const hor = `I'm ${firstName}, a ${year - birthYear} year old, my job is ${job}!`;
+console.log(hor);
+*/
+
+
 
 
 
