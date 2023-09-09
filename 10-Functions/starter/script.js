@@ -26,4 +26,12 @@
 // console.dir(f);
 
 // -- Coding Challeng
+(function () {
+    const header = document.querySelector('h1');
+    header.style.color = 'red';
+  
+    document.querySelector('body').addEventListener('click', function () {
+      header.style.color = 'blue';
+    });
+  })();
 
