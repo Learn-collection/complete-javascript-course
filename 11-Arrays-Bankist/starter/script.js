@@ -111,7 +111,48 @@ const displayMovements = function (movements) {
 }
 displayMovements(account1.movements);
 
- 
-
 /////////////////////////////////////////////////
+
+
+
+/// Learn a bout Map
+const eurToUsd = 1.1;
+
+const movementsUSD =  movements.map(function (movement){
+  return movement * eurToUsd;
+});
+
+//Arrow functions
+const m =  movements.map(mo => mo * eurToUsd);
+
+console.log(movements);
+console.log(movementsUSD);
+
+const movementsUSDfor = [];
+for(const mov of movements) movementsUSDfor.push(mov * eurToUsd);
+console.log(movementsUSDfor);
+
+const movementDesc = movements.map(
+  (mov, i) => 
+  `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'widthdraw'} ${Math.abs(mov)}` 
+)
+
+console.log(movementDesc);
+
+//// End learn a bout Map
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
