@@ -73,28 +73,29 @@ const currencies = new Map([
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-console.log('-- For of --');
+// console.log('-- For of --');
 
-for (const [i, movement] of movements.entries()) {
-  if (movement > 0) {
-    console.log(`Movement ${i + 1}: You deposited ${movement}`);
-  }
-}
+// for (const [i, movement] of movements.entries()) {
+//   if (movement > 0) {
+//     console.log(`Movement ${i + 1}: You deposited ${movement}`);
+//   }
+// }
 
-console.log('-- For Each --');
+// console.log('-- For Each --');
 
-movements.forEach(function (movement, index, array) {
-  if (movement > 0) {
-    console.log(`You deposited ${movement}`);
-  } else {
-    console.log(`You withdrew ${Math.abs(movement)}`);
-  }
-});
+// movements.forEach(function (movement, index, array) {
+//   if (movement > 0) {
+//     console.log(`You deposited ${movement}`);
+//   } else {
+//     console.log(`You withdrew ${Math.abs(movement)}`);
+//   }
+// });
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
   containerMovements.innerHTML = '';
 
-  movements.forEach(function (movement, i) {
+  movs.forEach(function (movement, i) {
     const type = movement > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -171,15 +172,19 @@ btnLogin.addEventListener('click', function (e) {
   );
   //Display UI and messages
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // Display UI and message
     labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(' ')[0]
     }`;
-  }
-  containerApp.style.opacity = 100;
-  inputLoginUsername.value = inputLoginPin.value = '';
-  inputLoginPin.blur();
+    containerApp.style.opacity = 100;
 
-  updateUi(currentAccount);
+    // Clear input fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();
+
+    // Update UI
+    updateUi(currentAccount);
+  }
 });
 
 btnTransfer.addEventListener('click', function (e) {
@@ -189,6 +194,7 @@ btnTransfer.addEventListener('click', function (e) {
   const receiverAcc = accounts.find(
     acc => acc.username === inputTransferTo.value
   );
+  inputTransferAmount.value = inputTransferTo.value = '';
 
   if (
     amount > 0 &&
@@ -203,6 +209,46 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+  if (
+    amount > 0 &&
+    currentAccount.movements.some(mov => mov >= amount * 0.01)
+  ) {
+    // Add movement
+    currentAccount.movements.push(amount);
+
+    //Update UI
+    updateUi(currentAccount);
+  }
+  inputLoanAmount.value = '';
+});
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    currentAccount.username === inputCloseUsername.value &&
+    currentAccount.pin === Number(inputClosePin.value)
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+    console.log(index);
+    accounts.splice(index, 1);
+    containerApp.style.opacity = 0;
+  }
+  inputCloseUsername.value = inputClosePin.value = '';
+});
+
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+});
 // const eurToUsd = 1.1;
 // const totalDepositUsd = movements
 //   .filter(mov => mov > 0)
@@ -285,3 +331,31 @@ GOOD LUCK 😀
 // console.log(juliaDoges);
 
 // const checkDogs = function (dogejilia, dogsKate) {};
+
+// console.log(movements);
+// console.log(movements.includes(-130));
+
+// const anyDeposits = movements.some();
+
+// const arr = [[1, 2, 3, 4, 5], [6, 7, 8, 9, [10, 11, 12]], 13, 14, 15, 16];
+// console.log(arr.flat(2));
+
+// const accountMovements = accounts.map(acc => acc.movements);
+// console.log(accountMovements);
+// const allMovements = accounts.flat();
+// console.log(allMovements);
+
+// const overalBalancee = accounts
+//   .map(acc => acc.movements)
+//   .flat()
+//   .reduce((acc, move) => acc + move, 0);
+// console.log(overalBalancee);
+
+//Sort Array
+// console.log(movements);
+// movements.sort((a, b) => {
+//   if(a > b) return 1;
+//   if(a < b) return -1;
+// });
+// console.log(movements);
+
