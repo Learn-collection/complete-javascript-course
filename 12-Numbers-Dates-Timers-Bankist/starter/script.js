@@ -251,3 +251,13 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+// console.log(23 === 23.0); 
+// console.log(0.1+0.2);
+// console.log(0.1 + 0.2 === 0.3);
+
+// const isEvent = n => n % 2 === 0;
+
+// console.log(isEvent(234))
+// console.log(isEvent(21))
+// console.log(isEvent(2322234567894))
+
