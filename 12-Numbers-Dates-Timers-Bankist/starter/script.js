@@ -274,3 +274,8 @@ btnSort.addEventListener('click', function (e) {
 // console.log(isEvent(234))
 // console.log(isEvent(21))
 // console.log(isEvent(2322234567894))
+
+// setInterval(() => {
+//   const now = new Date();
+//   console.log(now);
+// }, 1000);
