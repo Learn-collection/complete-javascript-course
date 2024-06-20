@@ -7,6 +7,8 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 
 const openModal = function () {
   modal.classList.remove('hidden');
@@ -29,6 +31,26 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+/////////////////////////////////
+//Srolling modal
+btnScrollTo.addEventListener('click', function () {
+  // Scrolling
+  const s1coords = section1.getBoundingClientRect();
+  window.scrollTo({
+    left: s1coords.left + window.scrollX,
+    top: s1coords.top + window.scrollY,
+    behavior: 'smooth',
+  });
+});
+
+/////////////////////////////////////////////////////
+// Page navigation
+document.querySelectorAll('.nav__link').forEach(function (el) {
+  el.addEventListener('click', function (e) {
+    e.preventDefault();
+  });
+});
+
 /////////////////////////////
 ///////////////////////////
 ////////////////////////////
@@ -72,21 +94,27 @@ message.style.height =
 
 // document.documentElement.style.setProperty('--color-primary', 'orangered');
 
-const btnScrollTo = document.querySelector('.btn--scroll-to');
-const section1 = document.querySelector('#section--1');
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
 
-btnScrollTo.addEventListener('click', function () {
-  // Scrolling
-  const s1coords = section1.getBoundingClientRect();
-  // window.scrollTo(
-  //   s1coords.left + window.scrollX,
-  //   s1coords.top + window.scrollY
-  // );
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
 
-  window.scrollTo({
-    left: s1coords.left + window.scrollX,
-    top: s1coords.top + window.scrollY,
-    behavior: 'smooth',
-  });
+document.querySelector('.nav').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('LINK 1', e.target, e.currentTarget);
 });
 
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('LINK 2', e.target, e.currentTarget);
+});
+
+document.querySelector('.nav__link').addEventListener(
+  'click',
+  function (e) {
+    this.style.backgroundColor = randomColor();
+    console.log('LINK 3', e.target, e.currentTarget);
+  },
+  true
+);
