@@ -45,10 +45,38 @@ btnScrollTo.addEventListener('click', function () {
 
 /////////////////////////////////////////////////////
 // Page navigation
-document.querySelectorAll('.nav__link').forEach(function (el) {
-  el.addEventListener('click', function (e) {
-    e.preventDefault();
-  });
+// const header = document.querySelector('.header');
+
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+
+//     const id = this.getAttribute('href');
+//     console.log(id);
+//     document.querySelector(id).scrollIntoView({
+//       behavior: 'smooth'
+//     });
+//   });
+// });
+
+/////////////////////////////////////////////////////
+// -- This is the tuning of function page navigation that have a good performance --
+// Page navigation
+
+// 1. Add event listener to common parent element
+// 2. Determine what element originated the event
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  // Matching strategy
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    console.log(id);
+    document.querySelector(id).scrollIntoView({
+      behavior: 'smooth',
+    });
+  }
 });
 
 /////////////////////////////
@@ -59,7 +87,6 @@ document.querySelectorAll('.nav__link').forEach(function (el) {
 // console.log(document.head);
 // console.log(document.body);
 
-const header = document.querySelector('.header');
 //  const allSeactions = document.querySelectorAll('.section');
 //  console.log(allSeactions);
 
@@ -69,52 +96,65 @@ const header = document.querySelector('.header');
 // Creating and inserting elements
 // .insertAdjacentHTML
 
-const message = document.createElement('div');
-message.classList.add('cookie-message');
+/////////////////////////////////////////////////////////////////////////
+////////// Cookie Usage /////////////
 
-message.innerHTML =
-  'We user cookies for improved functionality and annalytics. <button class="btn btn--close-cookie">Got it!</button>';
+// const message = document.createElement('div');
+// message.classList.add('cookie-message');
+// message.innerHTML =
+//   'We user cookies for improved functionality and annalytics. <button class="btn btn--close-cookie">Got it!</button>';
+// header.prepend(message);
+// header.before(message);
+// //Delete elements
+// document
+//   .querySelector('.btn--close-cookie')
+//   .addEventListener('click', function () {
+//     message.remove();
+//   });
 
-header.prepend(message);
-header.before(message);
-
-//Delete elements
-document
-  .querySelector('.btn--close-cookie')
-  .addEventListener('click', function () {
-    message.remove();
-  });
+//////////////////////////////////////////////////////////////////////////
 
 // Style
-message.style.backgroundColor = '#37383d';
-message.style.width = '120%';
+// message.style.backgroundColor = '#37383d';
+// message.style.width = '120%';
 
-message.style.height =
-  Number.parseFloat(getComputedStyle(message).height) + 40 + 30 + 'px';
+// message.style.height =
+//   Number.parseFloat(getComputedStyle(message).height) + 40 + 30 + 'px';
 
 // document.documentElement.style.setProperty('--color-primary', 'orangered');
 
-const randomInt = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1) + min);
+// const randomInt = (min, max) =>
+//   Math.floor(Math.random() * (max - min + 1) + min);
 
-const randomColor = () =>
-  `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+// const randomColor = () =>
+//   `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
 
-document.querySelector('.nav').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('LINK 1', e.target, e.currentTarget);
-});
+// document.querySelector('.nav__links').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   console.log('LINK 2', e.target, e.currentTarget);
 
-document.querySelector('.nav__links').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-  console.log('LINK 2', e.target, e.currentTarget);
-});
+//     //Stop propagation
+//     e.stopPropagation();
+// });
 
-document.querySelector('.nav__link').addEventListener(
-  'click',
-  function (e) {
-    this.style.backgroundColor = randomColor();
-    console.log('LINK 3', e.target, e.currentTarget);
-  },
-  true
-);
+// document.querySelector('.nav__link').addEventListener(
+//   'click',
+//   function (e) {
+//     this.style.backgroundColor = randomColor();
+//     console.log('LINK 3', e.target, e.currentTarget);
+//   },
+//   true
+// );
+
+// document.querySelector('.nav').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+//   console.log('LINK 1', e.target, e.currentTarget);
+// });
+
+
+///////////////////////////
+/////////////////////////////////////
+/////////////////////////////////////////
+/////////////////////////////////////////////
+// DOM Traversing
+
